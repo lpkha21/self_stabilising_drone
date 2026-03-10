@@ -102,15 +102,19 @@ public:
     if (dt <= 0) {
       return;
     }
-    // radio input
-    ReadJoystick();
 
     controlTimer += dt;
-    if (controlTimer < controlDt)
+    rcTimer += dt;
+    if (controlTimer < controlDt) {
       return;
-
+    }
     controlTimer -= controlDt;
 
+    // radio input
+    if (rcTimer >= rcDt) {
+      ReadJoystick();
+      rcTimer -= rcDt;
+    }
     // reading the IMU
     gz::msgs::IMU imu;
     {
@@ -151,13 +155,7 @@ public:
       m3 /= maxMotor;
       m4 /= maxMotor;
     }
-    if (minMotor < 0.0f) {
-      motorSaturation = fmax(motorSaturation, -minMotor);
-      m1 -= minMotor;
-      m2 -= minMotor;
-      m3 -= minMotor;
-      m4 -= minMotor;
-    }
+
     if (motorSaturation > 1.0f) {
       motorSaturation = 1.0f;
     }
@@ -182,6 +180,8 @@ private:
   gz::msgs::IMU imuMsg;
   std::mutex imuMutex;
   double controlTimer = 0.0;
+  double rcTimer = 0.0;
+  double rcDt = 1 / 50.0;
   double freq = 1000; // Hz
   double controlDt = 1.0 / freq;
   int js_fd = -1;

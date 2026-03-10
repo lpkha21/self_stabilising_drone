@@ -1,7 +1,8 @@
 CMakeFiles/controller.dir/controller.cpp.o: \
  /home/luka/Quad_Firmware/controller.cpp /usr/include/stdc-predef.h \
- /home/luka/Quad_Firmware/pid.h /usr/include/c++/13/algorithm \
- /usr/include/c++/13/bits/stl_algobase.h \
+ /home/luka/Quad_Firmware/mixer.h \
+ /usr/include/gz/msgs10/gz/msgs/actuators.pb.h /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -13,82 +14,39 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
  /usr/include/c++/13/pstl/pstl_config.h \
+ /usr/include/c++/13/bits/allocator.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+ /usr/include/c++/13/bits/new_allocator.h /usr/include/c++/13/new \
+ /usr/include/c++/13/bits/exception.h \
  /usr/include/c++/13/bits/functexcept.h \
  /usr/include/c++/13/bits/exception_defines.h \
- /usr/include/c++/13/bits/cpp_type_traits.h \
- /usr/include/c++/13/ext/type_traits.h \
- /usr/include/c++/13/ext/numeric_traits.h \
- /usr/include/c++/13/bits/stl_pair.h /usr/include/c++/13/type_traits \
- /usr/include/c++/13/bits/move.h /usr/include/c++/13/bits/utility.h \
+ /usr/include/c++/13/bits/move.h /usr/include/c++/13/type_traits \
+ /usr/include/c++/13/bits/stl_tempbuf.h \
+ /usr/include/c++/13/bits/stl_construct.h \
  /usr/include/c++/13/bits/stl_iterator_base_types.h \
  /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/13/bits/concept_check.h \
  /usr/include/c++/13/debug/assertions.h \
+ /usr/include/c++/13/bits/stl_pair.h /usr/include/c++/13/bits/utility.h \
+ /usr/include/c++/13/ext/numeric_traits.h \
+ /usr/include/c++/13/bits/cpp_type_traits.h \
+ /usr/include/c++/13/ext/type_traits.h \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_algobase.h \
  /usr/include/c++/13/bits/stl_iterator.h \
  /usr/include/c++/13/bits/ptr_traits.h /usr/include/c++/13/debug/debug.h \
  /usr/include/c++/13/bits/predefined_ops.h /usr/include/c++/13/bit \
- /usr/include/c++/13/bits/stl_algo.h \
- /usr/include/c++/13/bits/algorithmfwd.h \
- /usr/include/c++/13/initializer_list /usr/include/c++/13/bits/stl_heap.h \
- /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/new \
- /usr/include/c++/13/bits/exception.h \
- /usr/include/c++/13/bits/stl_construct.h /usr/include/c++/13/cstdlib \
- /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/time64.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endianness.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
- /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
- /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/c++/13/bits/std_abs.h \
- /usr/include/c++/13/pstl/glue_algorithm_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h /usr/include/fcntl.h \
- /usr/include/x86_64-linux-gnu/bits/fcntl.h \
- /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
- /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
- /usr/include/gz/msgs10/gz/msgs/actuators.pb.h /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/memoryfwd.h \
- /usr/include/c++/13/bits/allocator.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
- /usr/include/c++/13/bits/new_allocator.h \
- /usr/include/c++/13/bits/stl_uninitialized.h \
  /usr/include/c++/13/ext/alloc_traits.h \
  /usr/include/c++/13/bits/alloc_traits.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/time64.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/c++/13/bits/uses_allocator.h \
@@ -102,12 +60,17 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/c++/13/bits/stringfwd.h /usr/include/c++/13/bits/postypes.h \
  /usr/include/c++/13/cwchar /usr/include/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/c++/13/bits/shared_ptr_base.h /usr/include/c++/13/typeinfo \
  /usr/include/c++/13/bits/allocated_ptr.h \
  /usr/include/c++/13/bits/refwrap.h \
@@ -116,14 +79,29 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+ /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endianness.h \
  /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
  /usr/include/x86_64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+ /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
@@ -137,6 +115,7 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
  /usr/include/gz/msgs10/gz/msgs/Export.hh \
  /usr/include/gz/msgs10/gz/msgs/detail/Export.hh \
  /usr/include/gz/msgs10/gz/msgs/details/actuators.pb.h \
@@ -149,9 +128,20 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/ctype.h /usr/include/c++/13/bits/ostream_insert.h \
  /usr/include/c++/13/bits/cxxabi_forced.h \
  /usr/include/c++/13/bits/range_access.h \
+ /usr/include/c++/13/initializer_list \
  /usr/include/c++/13/bits/basic_string.h /usr/include/c++/13/string_view \
  /usr/include/c++/13/bits/string_view.tcc \
- /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cstdio \
+ /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cstdlib \
+ /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+ /usr/include/x86_64-linux-gnu/sys/select.h \
+ /usr/include/x86_64-linux-gnu/bits/select.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+ /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+ /usr/include/c++/13/bits/std_abs.h /usr/include/c++/13/cstdio \
  /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
@@ -180,9 +170,14 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/c++/13/cstring \
  /usr/include/string.h /usr/include/strings.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h \
- /usr/include/google/protobuf/stubs/common.h /usr/include/c++/13/iostream \
- /usr/include/c++/13/ostream /usr/include/c++/13/ios \
- /usr/include/c++/13/bits/ios_base.h \
+ /usr/include/google/protobuf/stubs/common.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
+ /usr/include/c++/13/bits/algorithmfwd.h \
+ /usr/include/c++/13/bits/stl_heap.h \
+ /usr/include/c++/13/bits/uniform_int_dist.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
+ /usr/include/c++/13/ios /usr/include/c++/13/bits/ios_base.h \
  /usr/include/c++/13/bits/locale_classes.h \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
@@ -269,6 +264,55 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/gz/msgs10/gz/msgs/details/header.pb.h \
  /usr/include/gz/msgs10/gz/msgs/time.pb.h \
  /usr/include/gz/msgs10/gz/msgs/details/time.pb.h \
+ /usr/include/gz/transport13/gz/transport/Node.hh \
+ /usr/include/c++/13/optional \
+ /usr/include/gz/transport13/gz/transport/AdvertiseOptions.hh \
+ /usr/include/gz/transport13/gz/transport/config.hh \
+ /usr/include/gz/transport13/gz/transport/Export.hh \
+ /usr/include/gz/transport13/gz/transport/detail/Export.hh \
+ /usr/include/gz/transport13/gz/transport/NodeOptions.hh \
+ /usr/include/gz/transport13/gz/transport/NodeShared.hh \
+ /usr/include/c++/13/thread /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/gz/transport13/gz/transport/HandlerStorage.hh \
+ /usr/include/gz/transport13/gz/transport/TransportTypes.hh \
+ /usr/include/c++/13/chrono \
+ /usr/include/gz/transport13/gz/transport/Publisher.hh \
+ /usr/include/gz/msgs10/gz/msgs/discovery.pb.h \
+ /usr/include/gz/msgs10/gz/msgs/details/discovery.pb.h \
+ /usr/include/gz/transport13/gz/transport/RepHandler.hh \
+ /usr/include/gz/transport13/gz/transport/Uuid.hh \
+ /usr/include/uuid/uuid.h /usr/include/x86_64-linux-gnu/sys/time.h \
+ /usr/include/gz/transport13/gz/transport/ReqHandler.hh \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/gz/transport13/gz/transport/SubscriptionHandler.hh \
+ /usr/include/gz/msgs10/gz/msgs/Factory.hh \
+ /usr/include/gz/msgs10/gz/msgs/config.hh \
+ /usr/include/gz/msgs10/gz/msgs/MessageFactory.hh \
+ /usr/include/gz/msgs10/gz/msgs/detail/dynamic_message_cast.hh \
+ /usr/include/gz/utils2/gz/utils/ImplPtr.hh \
+ /usr/include/gz/utils2/gz/utils/detail/DefaultOps.hh \
+ /usr/include/gz/utils2/gz/utils/SuppressWarning.hh \
+ /usr/include/gz/utils2/gz/utils/detail/SuppressWarning.hh \
+ /usr/include/gz/utils2/gz/utils/Export.hh \
+ /usr/include/gz/utils2/gz/utils/detail/Export.hh \
+ /usr/include/gz/utils2/gz/utils/detail/ImplPtr.hh \
+ /usr/include/gz/transport13/gz/transport/MessageInfo.hh \
+ /usr/include/gz/transport13/gz/transport/SubscribeOptions.hh \
+ /usr/include/gz/transport13/gz/transport/TopicStorage.hh \
+ /usr/include/gz/transport13/gz/transport/TopicStatistics.hh \
+ /usr/include/gz/msgs10/gz/msgs/statistic.pb.h \
+ /usr/include/gz/msgs10/gz/msgs/details/statistic.pb.h \
+ /usr/include/gz/transport13/gz/transport/TopicUtils.hh \
+ /usr/include/gz/transport13/gz/transport/detail/Node.hh \
+ /usr/include/gz/msgs10/gz/msgs/empty.pb.h \
+ /usr/include/gz/msgs10/gz/msgs/details/empty.pb.h \
+ /home/luka/Quad_Firmware/pid.h /usr/include/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
  /usr/include/gz/msgs10/gz/msgs/imu.pb.h \
  /usr/include/gz/msgs10/gz/msgs/details/imu.pb.h \
  /usr/include/gz/msgs10/gz/msgs/vector3d.pb.h \
@@ -280,8 +324,6 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/gz/plugin2/gz/plugin/Register.hh \
  /usr/include/gz/plugin2/gz/plugin/detail/Register.hh \
  /usr/include/gz/plugin2/gz/plugin/Info.hh \
- /usr/include/gz/utils2/gz/utils/SuppressWarning.hh \
- /usr/include/gz/utils2/gz/utils/detail/SuppressWarning.hh \
  /usr/include/gz/plugin2/gz/plugin/Export.hh \
  /usr/include/gz/plugin2/gz/plugin/detail/Export.hh \
  /usr/include/gz/plugin2/gz/plugin/detail/Common.hh \
@@ -295,9 +337,8 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/gz/sim8/gz/sim/Model.hh \
  /usr/include/gz/math7/gz/math/Pose3.hh \
  /usr/include/gz/math7/gz/math/Quaternion.hh \
- /usr/include/gz/math7/gz/math/Helpers.hh /usr/include/c++/13/chrono \
- /usr/include/c++/13/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/gz/math7/gz/math/Helpers.hh /usr/include/c++/13/cmath \
+ /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
@@ -340,7 +381,6 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/google/protobuf/map_field_inl.h \
  /usr/include/google/protobuf/map_field.h \
  /usr/include/google/protobuf/map_field_lite.h \
- /usr/include/c++/13/optional \
  /usr/include/gz/common5/gz/common/Console.hh /usr/include/c++/13/fstream \
  /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
@@ -350,16 +390,8 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/gz/common5/gz/common/Export.hh \
  /usr/include/gz/common5/gz/common/detail/Export.hh \
  /usr/include/gz/common5/gz/common/Util.hh /usr/include/c++/13/future \
- /usr/include/c++/13/condition_variable \
  /usr/include/c++/13/bits/atomic_futex.h \
- /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/thread \
- /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/gz/common5/gz/common/Filesystem.hh \
- /usr/include/gz/utils2/gz/utils/ImplPtr.hh \
- /usr/include/gz/utils2/gz/utils/detail/DefaultOps.hh \
- /usr/include/gz/utils2/gz/utils/Export.hh \
- /usr/include/gz/utils2/gz/utils/detail/Export.hh \
- /usr/include/gz/utils2/gz/utils/detail/ImplPtr.hh \
  /usr/include/gz/common5/gz/common/SystemPaths.hh \
  /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
  /usr/include/c++/13/bits/list.tcc \
@@ -387,7 +419,6 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/gz/msgs10/gz/msgs/details/parameter_declarations.pb.h \
  /usr/include/gz/msgs10/gz/msgs/parameter_declaration.pb.h \
  /usr/include/gz/msgs10/gz/msgs/details/parameter_declaration.pb.h \
- /usr/include/gz/transport13/gz/transport/config.hh \
  /usr/include/gz/transport13/gz/transport/parameters/result.hh \
  /usr/include/gz/transport13/gz/transport/parameters/Export.hh \
  /usr/include/gz/transport13/gz/transport/parameters/detail/Export.hh \
@@ -448,36 +479,6 @@ CMakeFiles/controller.dir/controller.cpp.o: \
  /usr/include/c++/13/bits/deque.tcc \
  /usr/include/gz/common5/gz/common/SingletonT.hh \
  /usr/include/gz/sim8/gz/sim/components/Pose.hh \
- /usr/include/gz/transport13/gz/transport/Node.hh \
- /usr/include/gz/transport13/gz/transport/AdvertiseOptions.hh \
- /usr/include/gz/transport13/gz/transport/Export.hh \
- /usr/include/gz/transport13/gz/transport/detail/Export.hh \
- /usr/include/gz/transport13/gz/transport/NodeOptions.hh \
- /usr/include/gz/transport13/gz/transport/NodeShared.hh \
- /usr/include/gz/transport13/gz/transport/HandlerStorage.hh \
- /usr/include/gz/transport13/gz/transport/TransportTypes.hh \
- /usr/include/gz/transport13/gz/transport/Publisher.hh \
- /usr/include/gz/msgs10/gz/msgs/discovery.pb.h \
- /usr/include/gz/msgs10/gz/msgs/details/discovery.pb.h \
- /usr/include/gz/transport13/gz/transport/RepHandler.hh \
- /usr/include/gz/transport13/gz/transport/Uuid.hh \
- /usr/include/uuid/uuid.h /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/include/gz/transport13/gz/transport/ReqHandler.hh \
- /usr/include/gz/transport13/gz/transport/SubscriptionHandler.hh \
- /usr/include/gz/msgs10/gz/msgs/Factory.hh \
- /usr/include/gz/msgs10/gz/msgs/config.hh \
- /usr/include/gz/msgs10/gz/msgs/MessageFactory.hh \
- /usr/include/gz/msgs10/gz/msgs/detail/dynamic_message_cast.hh \
- /usr/include/gz/transport13/gz/transport/MessageInfo.hh \
- /usr/include/gz/transport13/gz/transport/SubscribeOptions.hh \
- /usr/include/gz/transport13/gz/transport/TopicStorage.hh \
- /usr/include/gz/transport13/gz/transport/TopicStatistics.hh \
- /usr/include/gz/msgs10/gz/msgs/statistic.pb.h \
- /usr/include/gz/msgs10/gz/msgs/details/statistic.pb.h \
- /usr/include/gz/transport13/gz/transport/TopicUtils.hh \
- /usr/include/gz/transport13/gz/transport/detail/Node.hh \
- /usr/include/gz/msgs10/gz/msgs/empty.pb.h \
- /usr/include/gz/msgs10/gz/msgs/details/empty.pb.h \
  /usr/include/linux/input.h /usr/include/x86_64-linux-gnu/sys/ioctl.h \
  /usr/include/x86_64-linux-gnu/bits/ioctls.h \
  /usr/include/x86_64-linux-gnu/asm/ioctls.h \

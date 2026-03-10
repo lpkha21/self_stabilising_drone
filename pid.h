@@ -29,12 +29,10 @@ typedef struct PIDAxis {
   float ffAlpha = 0.2f;
 } PIDAxis;
 
-typedef struct PID {
-  PIDAxis roll;
-  PIDAxis pitch;
-  PIDAxis yaw;
-} PID;
+extern PIDAxis pid[3];
 
-float pidController(PIDAxis &pid, float setpoint, float gyro, float dt,
-                    float throttle, float motorSaturation);
+void rotateIterm(float gyro[3], float dt);
+
+void pidController(double output[3], float setpoint[3], float gyro[3], float dt,
+                   float throttle, float motorSaturation);
 void pidReset(PIDAxis &pid);

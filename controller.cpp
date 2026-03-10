@@ -19,8 +19,8 @@
 
 #define ROLL 0
 #define PITCH 1
-#define THROTTLE 2
-#define YAW 3
+#define YAW 2
+#define THROTTLE 3
 
 #define RATE 3
 
@@ -61,41 +61,41 @@ public:
 
     gzmsg << "Controller initialized\n";
 
-    pid.pitch.kp = pid.roll.kp = 0.25;
-    pid.pitch.ki = pid.roll.ki = 0.12;
-    pid.pitch.kd = pid.roll.kd = 0.003;
-    pid.pitch.kf = pid.roll.kf = 0.004;
-    pid.roll.itermRelaxGain = pid.pitch.itermRelaxGain = 0.002f;
-    pid.roll.itermRelaxMin = pid.pitch.itermRelaxMin = 0.2f;
-    pid.roll.ffAlpha = 0.2;
-    pid.pitch.ffAlpha = 0.2;
-    pid.roll.dMinPercent = pid.pitch.dMinPercent = 0.25f;
-    pid.roll.dMinGain = pid.pitch.dMinGain = 0.02f;
-    pid.roll.dMinAlpha = pid.pitch.dMinAlpha = 0.1f;
-    pid.roll.dMinFilter = pid.roll.dMinPercent;
-    pid.pitch.dMinFilter = pid.pitch.dMinPercent;
-    pid.roll.dMinSetpointGain = 0.01f;
-    pid.pitch.dMinSetpointGain = 0.01f;
+    pid[PITCH].kp = pid[ROLL].kp = 0.25;
+    pid[PITCH].ki = pid[ROLL].ki = 0.12;
+    pid[PITCH].kd = pid[ROLL].kd = 0.003;
+    pid[PITCH].kf = pid[ROLL].kf = 0.004;
+    pid[ROLL].itermRelaxGain = pid[PITCH].itermRelaxGain = 0.002f;
+    pid[ROLL].itermRelaxMin = pid[PITCH].itermRelaxMin = 0.2f;
+    pid[ROLL].ffAlpha = 0.2;
+    pid[PITCH].ffAlpha = 0.2;
+    pid[ROLL].dMinPercent = pid[PITCH].dMinPercent = 0.25f;
+    pid[ROLL].dMinGain = pid[PITCH].dMinGain = 0.02f;
+    pid[ROLL].dMinAlpha = pid[PITCH].dMinAlpha = 0.1f;
+    pid[ROLL].dMinFilter = pid[ROLL].dMinPercent;
+    pid[PITCH].dMinFilter = pid[PITCH].dMinPercent;
+    pid[ROLL].dMinSetpointGain = 0.01f;
+    pid[PITCH].dMinSetpointGain = 0.01f;
 
-    pid.yaw.kp = 0.15;
-    pid.yaw.ki = 0.08;
-    pid.yaw.kd = 0;
-    pid.yaw.kf = 0.002;
-    pid.yaw.itermRelaxGain = 0.001f;
-    pid.yaw.itermRelaxMin = 0.3f;
-    pid.yaw.ffAlpha = 0.15;
-    pid.yaw.dMinPercent = 0.0f;
-    pid.yaw.dMinGain = 0.0f;
-    pid.yaw.dMinAlpha = 0.1f;
-    pid.yaw.dMinFilter = pid.yaw.dMinPercent;
+    pid[YAW].kp = 0.15;
+    pid[YAW].ki = 0.08;
+    pid[YAW].kd = 0;
+    pid[YAW].kf = 0.002;
+    pid[YAW].itermRelaxGain = 0.001f;
+    pid[YAW].itermRelaxMin = 0.3f;
+    pid[YAW].ffAlpha = 0.15;
+    pid[YAW].dMinPercent = 0.0f;
+    pid[YAW].dMinGain = 0.0f;
+    pid[YAW].dMinAlpha = 0.1f;
+    pid[YAW].dMinFilter = pid[YAW].dMinPercent;
   }
 
   void PreUpdate(const UpdateInfo &_info,
                  EntityComponentManager &_ecm) override {
     if (_info.paused) {
-      pidReset(pid.pitch);
-      pidReset(pid.roll);
-      pidReset(pid.yaw);
+      pidReset(pid[PITCH]);
+      pidReset(pid[ROLL]);
+      pidReset(pid[YAW]);
       return;
     }
     // 1000 Hz controll loop
@@ -122,24 +122,24 @@ public:
       std::lock_guard<std::mutex> lock(imuMutex);
       imu = imuMsg;
     }
-    double gx = imu.angular_velocity().x();
-    double gy = imu.angular_velocity().y();
-    double gz = imu.angular_velocity().z();
+    float gx = imu.angular_velocity().x();
+    float gy = imu.angular_velocity().y();
+    float gz = imu.angular_velocity().z();
 
     double ax = imu.linear_acceleration().x();
     double ay = imu.linear_acceleration().y();
     double az = imu.linear_acceleration().z();
 
-    double throttle = (rc[THROTTLE] + 1) / 2.0;
+    double throttle = (rc[2] + 1) / 2.0;
     // PID
-    double roll_out = pidController(pid.roll, rc[ROLL] * RATE, gx, controlDt,
-                                    throttle, motorSaturation);
-    double pitch_out = pidController(pid.pitch, rc[PITCH] * RATE, gy, controlDt,
-                                     throttle, motorSaturation);
-    double yaw_out = pidController(pid.yaw, -rc[YAW] * RATE, gz, controlDt,
-                                   throttle, motorSaturation);
+    float gyro[3] = {gx, gy, gz};
+    rotateIterm(gyro, controlDt);
+    double output[4];
+    float sp[3] = {rc[0] * RATE, rc[1] * RATE, -rc[3] * RATE};
+    pidController(output, sp, gyro, controlDt, throttle, motorSaturation);
+    output[3] = throttle;
+    motorSaturation = mixer(motorPub, output);
 
-    motorSaturation = mixer(motorPub, throttle, roll_out, pitch_out, yaw_out);
     // gzmsg << m1 << std::endl;
     // gzmsg << -rc[PITCH] << " " << gy << "\n";
   }
@@ -154,7 +154,6 @@ private:
   double freq = 1000; // Hz
   double controlDt = 1.0 / freq;
   int js_fd = -1;
-  PID pid;
   float motorSaturation = 0.0f;
 
   double gx_prev = 0;
@@ -165,7 +164,7 @@ private:
   double ay_prev = 0;
   double az_prev = 0;
 
-  double rc[4] = {0, 0, 0, 0};
+  float rc[4] = {0, 0, 0, 0};
 
   transport::Node node;
   transport::Node::Publisher motorPub;
@@ -173,8 +172,8 @@ private:
     std::lock_guard<std::mutex> lock(imuMutex);
     imuMsg = _msg;
   }
-  double Normalize(int v) {
-    const double c = 1024.0;
+  float Normalize(int v) {
+    const float c = 1024.0;
     return (v - c) / c;
   }
   void ReadJoystick() {
@@ -185,7 +184,7 @@ private:
 
     while (read(js_fd, &ev, sizeof(ev)) > 0) {
       if (ev.type == EV_ABS) {
-        if (ev.code <= YAW) {
+        if (ev.code <= THROTTLE) {
           rc[ev.code] = Normalize(ev.value);
         }
       }

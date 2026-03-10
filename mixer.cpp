@@ -1,10 +1,16 @@
 #include "mixer.h"
 #include <cmath>
 #include <gz/msgs/actuators.pb.h>
+#include <gz/sim/Util.hh>
 #include <gz/transport/Node.hh>
 
-float mixer(gz::transport::Node::Publisher &motorPub, double throttle,
-            double roll_out, double pitch_out, double yaw_out) {
+float mixer(gz::transport::Node::Publisher &motorPub, double output[4]) {
+
+  double throttle = output[3];
+  double roll_out = output[0];
+  double pitch_out = output[1];
+  double yaw_out = output[2];
+
   double m1 = throttle - roll_out - pitch_out - yaw_out;
   double m2 = throttle + roll_out + pitch_out - yaw_out;
   double m3 = throttle + roll_out - pitch_out + yaw_out;
@@ -12,7 +18,6 @@ float mixer(gz::transport::Node::Publisher &motorPub, double throttle,
   float motorSaturation = 0.0f;
   float scale = 1.0f;
 
-  float minMotor = fmin(fmin(m1, m2), fmin(m3, m4));
   float maxMotor = fmax(fmax(m1, m2), fmax(m3, m4));
 
   if (maxMotor > 1.0f) {
@@ -38,6 +43,5 @@ float mixer(gz::transport::Node::Publisher &motorPub, double throttle,
   msg.add_velocity(m3 * 1500); // front-left
   msg.add_velocity(m4 * 1500); // back-right
   motorPub.Publish(msg);
-
   return motorSaturation;
 }

@@ -153,6 +153,30 @@ controller.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/controller.dir/build.make CMakeFiles/controller.dir/controller.cpp.s
 .PHONY : controller.cpp.s
 
+mixer.o: mixer.cpp.o
+.PHONY : mixer.o
+
+# target to build an object file
+mixer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/controller.dir/build.make CMakeFiles/controller.dir/mixer.cpp.o
+.PHONY : mixer.cpp.o
+
+mixer.i: mixer.cpp.i
+.PHONY : mixer.i
+
+# target to preprocess a source file
+mixer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/controller.dir/build.make CMakeFiles/controller.dir/mixer.cpp.i
+.PHONY : mixer.cpp.i
+
+mixer.s: mixer.cpp.s
+.PHONY : mixer.s
+
+# target to generate assembly for a file
+mixer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/controller.dir/build.make CMakeFiles/controller.dir/mixer.cpp.s
+.PHONY : mixer.cpp.s
+
 pid.o: pid.cpp.o
 .PHONY : pid.o
 
@@ -189,6 +213,9 @@ help:
 	@echo "... controller.o"
 	@echo "... controller.i"
 	@echo "... controller.s"
+	@echo "... mixer.o"
+	@echo "... mixer.i"
+	@echo "... mixer.s"
 	@echo "... pid.o"
 	@echo "... pid.i"
 	@echo "... pid.s"

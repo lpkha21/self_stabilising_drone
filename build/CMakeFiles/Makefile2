@@ -81,12 +81,12 @@ clean: CMakeFiles/controller.dir/clean
 CMakeFiles/controller.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/controller.dir/build.make CMakeFiles/controller.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/controller.dir/build.make CMakeFiles/controller.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/luka/Quad_Firmware/build/CMakeFiles --progress-num=1,2,3 "Built target controller"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/luka/Quad_Firmware/build/CMakeFiles --progress-num=1,2,3,4 "Built target controller"
 .PHONY : CMakeFiles/controller.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/controller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/luka/Quad_Firmware/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/luka/Quad_Firmware/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/controller.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/luka/Quad_Firmware/build/CMakeFiles 0
 .PHONY : CMakeFiles/controller.dir/rule

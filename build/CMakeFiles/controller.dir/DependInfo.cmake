@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/luka/Quad_Firmware/controller.cpp" "CMakeFiles/controller.dir/controller.cpp.o" "gcc" "CMakeFiles/controller.dir/controller.cpp.o.d"
+  "/home/luka/Quad_Firmware/mixer.cpp" "CMakeFiles/controller.dir/mixer.cpp.o" "gcc" "CMakeFiles/controller.dir/mixer.cpp.o.d"
   "/home/luka/Quad_Firmware/pid.cpp" "CMakeFiles/controller.dir/pid.cpp.o" "gcc" "CMakeFiles/controller.dir/pid.cpp.o.d"
   )
 

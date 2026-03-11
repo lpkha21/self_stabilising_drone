@@ -16,4 +16,4 @@ typedef enum {
 void biquadFilterInit(biquadFilter_t &filter, filterType_e type,
                       float filterFreq, uint32_t refreshRate, float Q);
 
-float biquadFilterApply(biquadFilter_t *filter, float input);
+float biquadFilterApply(biquadFilter_t &filter, float input);

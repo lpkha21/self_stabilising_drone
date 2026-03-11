@@ -6,7 +6,7 @@ find_package(gz-sim8 REQUIRED)
 set(GZ_PROP_VER 8)
 
 # 2. Define our plugin (The "Shared Library")
-add_library(controller SHARED mixer.cpp pid.cpp controller.cpp)
+add_library(controller SHARED filter.cpp mixer.cpp pid.cpp controller.cpp)
 
 # 3. Link the Gazebo libraries to our code
 target_link_libraries(controller

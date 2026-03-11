@@ -32,18 +32,23 @@ void rotateIterm(float gyro[3], float dt) {
   }
 }
 
-void pidController(double output[3], float setpoint[3], float gyro[3], float dt,
+void pidController(float output[4], float setpoint[3], float gyro[3], float dt,
                    float throttle, float motorSaturation) {
-  if (dt <= 0.0001)
+  if (dt <= 0.0001) {
     return;
+  }
+  rotateIterm(gyro, dt);
 
   for (int i = 0; i < 3; i++) {
     float error = setpoint[i] - gyro[i];
 
     float tpaFactor = 1.0;
 
-    if (throttle > 0.6)
-      tpaFactor = 1.0 - (throttle - 0.6) * 0.7;
+    if (throttle > 0.9f) {
+      tpaFactor = 1.0 - (throttle - 0.9f) * 0.3;
+    }
+
+    tpaFactor = fmax(0.3f, fmin(tpaFactor, 1.0f));
 
     float P = pid[i].kp * error * tpaFactor;
 
@@ -56,9 +61,18 @@ void pidController(double output[3], float setpoint[3], float gyro[3], float dt,
       relaxFactor = pid[i].itermRelaxMin;
     }
 
-    float antiWindup = 1.0f - motorSaturation;
+    bool allowIterm = true;
 
-    pid[i].integral += error * pid[i].ki * dt * relaxFactor * antiWindup;
+    if (motorSaturation > 0.01f) {
+      if ((pid[i].integral > 0 && error > 0) ||
+          (pid[i].integral < 0 && error < 0)) {
+        allowIterm = false;
+      }
+    }
+
+    if (allowIterm) {
+      pid[i].integral += error * pid[i].ki * dt * relaxFactor;
+    }
 
     if (pid[i].integral > pid[i].itermLimit) {
       pid[i].integral = pid[i].itermLimit;

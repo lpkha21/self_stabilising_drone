@@ -33,6 +33,6 @@ extern PIDAxis pid[3];
 
 void rotateIterm(float gyro[3], float dt);
 
-void pidController(double output[3], float setpoint[3], float gyro[3], float dt,
+void pidController(float output[4], float setpoint[3], float gyro[3], float dt,
                    float throttle, float motorSaturation);
 void pidReset(PIDAxis &pid);

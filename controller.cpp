@@ -1,3 +1,4 @@
+#include "filter.h"
 #include "mixer.h"
 #include "pid.h"
 #include <algorithm>
@@ -64,7 +65,7 @@ public:
     pid[PITCH].kp = pid[ROLL].kp = 0.25;
     pid[PITCH].ki = pid[ROLL].ki = 0.12;
     pid[PITCH].kd = pid[ROLL].kd = 0.003;
-    pid[PITCH].kf = pid[ROLL].kf = 0.004;
+    // pid[PITCH].kf = pid[ROLL].kf = 0.004;
     pid[ROLL].itermRelaxGain = pid[PITCH].itermRelaxGain = 0.002f;
     pid[ROLL].itermRelaxMin = pid[PITCH].itermRelaxMin = 0.2f;
     pid[ROLL].ffAlpha = 0.2;
@@ -77,10 +78,10 @@ public:
     pid[ROLL].dMinSetpointGain = 0.01f;
     pid[PITCH].dMinSetpointGain = 0.01f;
 
-    pid[YAW].kp = 0.15;
-    pid[YAW].ki = 0.08;
+    pid[YAW].kp = 0.20f;
+    pid[YAW].ki = 0.10f;
+    // pid[YAW].kf = 0.003f;
     pid[YAW].kd = 0;
-    pid[YAW].kf = 0.002;
     pid[YAW].itermRelaxGain = 0.001f;
     pid[YAW].itermRelaxMin = 0.3f;
     pid[YAW].ffAlpha = 0.15;
@@ -88,6 +89,17 @@ public:
     pid[YAW].dMinGain = 0.0f;
     pid[YAW].dMinAlpha = 0.1f;
     pid[YAW].dMinFilter = pid[YAW].dMinPercent;
+    float lpfQ = 0.707f;
+    float notchQ = 5;
+    float refreshRate = controlDt * 1e6;
+    biquadFilterInit(lowpassFilterX, FILTER_LPF, 90, refreshRate, lpfQ);
+    biquadFilterInit(notchFilterX, FILTER_NOTCH, 150, refreshRate, notchQ);
+
+    biquadFilterInit(lowpassFilterY, FILTER_LPF, 90, refreshRate, lpfQ);
+    biquadFilterInit(notchFilterY, FILTER_NOTCH, 150, refreshRate, notchQ);
+
+    biquadFilterInit(lowpassFilterZ, FILTER_LPF, 90, refreshRate, lpfQ);
+    biquadFilterInit(notchFilterZ, FILTER_NOTCH, 150, refreshRate, notchQ);
   }
 
   void PreUpdate(const UpdateInfo &_info,
@@ -126,6 +138,14 @@ public:
     float gy = imu.angular_velocity().y();
     float gz = imu.angular_velocity().z();
 
+    gx = biquadFilterApply(notchFilterX, gx);
+    gy = biquadFilterApply(notchFilterY, gy);
+    gz = biquadFilterApply(notchFilterZ, gz);
+
+    gx = biquadFilterApply(lowpassFilterX, gx);
+    gy = biquadFilterApply(lowpassFilterY, gy);
+    gz = biquadFilterApply(lowpassFilterZ, gz);
+
     double ax = imu.linear_acceleration().x();
     double ay = imu.linear_acceleration().y();
     double az = imu.linear_acceleration().z();
@@ -133,8 +153,7 @@ public:
     double throttle = (rc[2] + 1) / 2.0;
     // PID
     float gyro[3] = {gx, gy, gz};
-    rotateIterm(gyro, controlDt);
-    double output[4];
+    float output[4];
     float sp[3] = {rc[0] * RATE, rc[1] * RATE, -rc[3] * RATE};
     pidController(output, sp, gyro, controlDt, throttle, motorSaturation);
     output[3] = throttle;
@@ -148,6 +167,14 @@ private:
   Model model{kNullEntity};
   gz::msgs::IMU imuMsg;
   std::mutex imuMutex;
+  biquadFilter_t lowpassFilterX;
+  biquadFilter_t notchFilterX;
+
+  biquadFilter_t lowpassFilterY;
+  biquadFilter_t notchFilterY;
+
+  biquadFilter_t lowpassFilterZ;
+  biquadFilter_t notchFilterZ;
   double controlTimer = 0.0;
   double rcTimer = 0.0;
   double rcDt = 1 / 50.0;

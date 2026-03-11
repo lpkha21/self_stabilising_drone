@@ -34,6 +34,7 @@
 
         <scene>
             <shadows>true</shadows>
+            <grid>true</grid>
         </scene>
 
         <!-- Sun -->
@@ -41,183 +42,15 @@
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
         </include>
 
-        <!-- Ground -->
+        <!-- Baylands terrain -->
         <include>
-            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Baylands</uri>
         </include>
 
         <!-- Your drone -->
         <include>
             <uri>model://x500</uri>
-            <pose>0 0 0 0 0 0</pose>
+            <pose>0 0 0.2 0 0 0</pose>
         </include>
-
-        <!-- ===== Orientation landmarks ===== -->
-
-        <!-- Red box -->
-        <model name="landmark_red">
-            <static>true</static>
-            <pose>10 0 1 0 0 0</pose>
-            <link name="link">
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                    <material>
-                        <ambient>1 0 0 1</ambient>
-                        <diffuse>1 0 0 1</diffuse>
-                    </material>
-                </visual>
-            </link>
-        </model>
-
-        <!-- Green box -->
-        <model name="landmark_green">
-            <static>true</static>
-            <pose>-10 0 1 0 0 0</pose>
-            <link name="link">
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                    <material>
-                        <ambient>0 1 0 1</ambient>
-                        <diffuse>0 1 0 1</diffuse>
-                    </material>
-                </visual>
-            </link>
-        </model>
-
-        <!-- Blue box -->
-        <model name="landmark_blue">
-            <static>true</static>
-            <pose>0 10 1 0 0 0</pose>
-            <link name="link">
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                    <material>
-                        <ambient>0 0 1 1</ambient>
-                        <diffuse>0 0 1 1</diffuse>
-                    </material>
-                </visual>
-            </link>
-        </model>
-
-        <!-- Yellow box -->
-        <model name="landmark_yellow">
-            <static>true</static>
-            <pose>0 -10 1 0 0 0</pose>
-            <link name="link">
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>2 2 2</size>
-                        </box>
-                    </geometry>
-                    <material>
-                        <ambient>1 1 0 1</ambient>
-                        <diffuse>1 1 0 1</diffuse>
-                    </material>
-                </visual>
-            </link>
-        </model>
-
-        <!-- ===== simple FPV gate ===== -->
-
-        <model name="fpv_gate">
-            <static>true</static>
-            <pose>15 0 1 0 0 0</pose>
-
-            <link name="left_pole">
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>0.2 0.2 2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>0.2 0.2 2</size>
-                        </box>
-                    </geometry>
-                </visual>
-            </link>
-
-            <link name="right_pole">
-                <pose>3 0 0 0 0 0</pose>
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>0.2 0.2 2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>0.2 0.2 2</size>
-                        </box>
-                    </geometry>
-                </visual>
-            </link>
-
-            <link name="top_bar">
-                <pose>1.5 0 1 0 0 0</pose>
-                <collision name="collision">
-                    <geometry>
-                        <box>
-                            <size>3 0.2 0.2</size>
-                        </box>
-                    </geometry>
-                </collision>
-                <visual name="visual">
-                    <geometry>
-                        <box>
-                            <size>3 0.2 0.2</size>
-                        </box>
-                    </geometry>
-                </visual>
-            </link>
-
-        </model>
-
     </world>
 </sdf>

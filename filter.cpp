@@ -67,15 +67,15 @@ void biquadFilterInit(biquadFilter_t &filter, filterType_e type,
   filter.y1 = filter.y2 = 0;
 }
 
-float biquadFilterApply(biquadFilter_t *filter, float input) {
+float biquadFilterApply(biquadFilter_t &filter, float input) {
   const float result =
-      filter->b0 * input + filter->x1; // y[n+1] = b0 * x[n+1] + x1
+      filter.b0 * input + filter.x1; // y[n+1] = b0 * x[n+1] + x1
 
-  filter->x1 = filter->b1 * input - filter->a1 * result +
-               filter->x2; // x1 = b1 * x[n] - a1 * y[n] + x2
+  filter.x1 = filter.b1 * input - filter.a1 * result +
+              filter.x2; // x1 = b1 * x[n] - a1 * y[n] + x2
 
-  filter->x2 =
-      filter->b2 * input - filter->a2 * result; // x2 = b2 * x[n] - a2 * y[n]
+  filter.x2 =
+      filter.b2 * input - filter.a2 * result; // x2 = b2 * x[n] - a2 * y[n]
 
   return result;
 }

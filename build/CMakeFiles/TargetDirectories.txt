@@ -1,3 +1,0 @@
-/home/luka/Quad_Firmware/build/CMakeFiles/controller.dir
-/home/luka/Quad_Firmware/build/CMakeFiles/edit_cache.dir
-/home/luka/Quad_Firmware/build/CMakeFiles/rebuild_cache.dir

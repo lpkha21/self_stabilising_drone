@@ -10,9 +10,9 @@ typedef struct PIDAxis {
   float prevGyro = 0;
   float prevSetpoint = 0;
   float dtermState = 0;
-  float dtermAlpha = 0.1;
+  float dtermAlpha = 0.3;
   float dtermFilter = 0;
-  float dtermAlpha2 = 0.2f;
+  float dtermAlpha2 = 0.35f;
 
   float dMinPercent = 0.25f;
   float dMinGain = 0.02f;
@@ -27,6 +27,14 @@ typedef struct PIDAxis {
 
   float ffState = 0;
   float ffAlpha = 0.2f;
+
+  float setpointFiltered = 0.0f;
+  float setpointAlpha = 0.2f;
+
+  float prevPD = 0;
+
+  float pdLimit = 0.45f;
+  float slewLimit = 20.0f;
 } PIDAxis;
 
 extern PIDAxis pid[3];
@@ -34,5 +42,5 @@ extern PIDAxis pid[3];
 void rotateIterm(float gyro[3], float dt);
 
 void pidController(float output[4], float setpoint[3], float gyro[3], float dt,
-                   float throttle, float motorSaturation);
+                   float throttle);
 void pidReset(PIDAxis &pid);

@@ -1,14 +1,21 @@
 cmake_minimum_required(VERSION 3.10)
 project(controller)
 
-# 1. Find the Gazebo libraries
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Find Gazebo
 find_package(gz-sim8 REQUIRED)
 set(GZ_PROP_VER 8)
 
-# 2. Define our plugin (The "Shared Library")
-add_library(controller SHARED filter.cpp mixer.cpp pid.cpp controller.cpp)
+# Plugin library
+add_library(controller SHARED
+    filter.cpp
+    mixer.cpp
+    pid.cpp
+    controller.cpp
+)
 
-# 3. Link the Gazebo libraries to our code
+# Link Gazebo
 target_link_libraries(controller
   gz-sim${GZ_PROP_VER}::gz-sim${GZ_PROP_VER}
 )

@@ -60,12 +60,10 @@ public:
       gzmsg << "Joystick opened\n";
     }
 
-    gzmsg << "Controller initialized\n";
-
-    pid[PITCH].kp = pid[ROLL].kp = 0.25;
-    pid[PITCH].ki = pid[ROLL].ki = 0.12;
-    pid[PITCH].kd = pid[ROLL].kd = 0.003;
-    // pid[PITCH].kf = pid[ROLL].kf = 0.004;
+    pid[PITCH].kp = pid[ROLL].kp = 0.12;
+    pid[PITCH].ki = pid[ROLL].ki = 0.035;
+    pid[PITCH].kd = pid[ROLL].kd = 0.01;
+    pid[PITCH].kf = pid[ROLL].kf = 0.007;
     pid[ROLL].itermRelaxGain = pid[PITCH].itermRelaxGain = 0.002f;
     pid[ROLL].itermRelaxMin = pid[PITCH].itermRelaxMin = 0.2f;
     pid[ROLL].ffAlpha = 0.2;
@@ -78,10 +76,10 @@ public:
     pid[ROLL].dMinSetpointGain = 0.01f;
     pid[PITCH].dMinSetpointGain = 0.01f;
 
-    pid[YAW].kp = 0.20f;
-    pid[YAW].ki = 0.10f;
-    // pid[YAW].kf = 0.003f;
-    pid[YAW].kd = 0;
+    pid[YAW].kp = 0.15f;
+    pid[YAW].ki = 0.08f;
+    pid[YAW].kf = 0.0f;
+    pid[YAW].kd = 0.0f;
     pid[YAW].itermRelaxGain = 0.001f;
     pid[YAW].itermRelaxMin = 0.3f;
     pid[YAW].ffAlpha = 0.15;
@@ -92,14 +90,16 @@ public:
     float lpfQ = 0.707f;
     float notchQ = 5;
     float refreshRate = controlDt * 1e6;
-    biquadFilterInit(lowpassFilterX, FILTER_LPF, 90, refreshRate, lpfQ);
-    biquadFilterInit(notchFilterX, FILTER_NOTCH, 150, refreshRate, notchQ);
+    biquadFilterInit(lowpassFilterX, FILTER_LPF, 100, refreshRate, lpfQ);
+    biquadFilterInit(notchFilterX, FILTER_NOTCH, 250, refreshRate, notchQ);
 
-    biquadFilterInit(lowpassFilterY, FILTER_LPF, 90, refreshRate, lpfQ);
-    biquadFilterInit(notchFilterY, FILTER_NOTCH, 150, refreshRate, notchQ);
+    biquadFilterInit(lowpassFilterY, FILTER_LPF, 100, refreshRate, lpfQ);
+    biquadFilterInit(notchFilterY, FILTER_NOTCH, 250, refreshRate, notchQ);
 
-    biquadFilterInit(lowpassFilterZ, FILTER_LPF, 90, refreshRate, lpfQ);
-    biquadFilterInit(notchFilterZ, FILTER_NOTCH, 150, refreshRate, notchQ);
+    biquadFilterInit(lowpassFilterZ, FILTER_LPF, 100, refreshRate, lpfQ);
+    biquadFilterInit(notchFilterZ, FILTER_NOTCH, 250, refreshRate, notchQ);
+
+    gzmsg << "Controller initialized\n";
   }
 
   void PreUpdate(const UpdateInfo &_info,
@@ -110,7 +110,7 @@ public:
       pidReset(pid[YAW]);
       return;
     }
-    // 1000 Hz controll loop
+
     double dt = std::chrono::duration<double>(_info.dt).count();
     if (dt <= 0) {
       return;
@@ -155,9 +155,9 @@ public:
     float gyro[3] = {gx, gy, gz};
     float output[4];
     float sp[3] = {rc[0] * RATE, rc[1] * RATE, -rc[3] * RATE};
-    pidController(output, sp, gyro, controlDt, throttle, motorSaturation);
+    pidController(output, sp, gyro, controlDt, throttle);
     output[3] = throttle;
-    motorSaturation = mixer(motorPub, output);
+    mixer(motorPub, output);
 
     // gzmsg << m1 << std::endl;
     // gzmsg << -rc[PITCH] << " " << gy << "\n";
@@ -177,11 +177,10 @@ private:
   biquadFilter_t notchFilterZ;
   double controlTimer = 0.0;
   double rcTimer = 0.0;
-  double rcDt = 1 / 50.0;
+  double rcDt = 1 / 100.0;
   double freq = 1000; // Hz
   double controlDt = 1.0 / freq;
   int js_fd = -1;
-  float motorSaturation = 0.0f;
 
   double gx_prev = 0;
   double gy_prev = 0;

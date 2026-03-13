@@ -1,7 +1,6 @@
 #include "filter.h"
 #include "mixer.h"
 #include "pid.h"
-#include <algorithm>
 #include <fcntl.h>
 #include <gz/msgs/actuators.pb.h>
 #include <gz/msgs/imu.pb.h>
